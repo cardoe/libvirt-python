@@ -254,7 +254,7 @@ cleanup:
     return NULL;
 }
 
-
+#if LIBVIR_CHECK_VERSION(1, 0, 2)
 typedef struct {
     const char *name;
     int type;
@@ -406,6 +406,7 @@ cleanup:
     virTypedParamsFree(params, n);
     return ret;
 }
+#endif /* LIBVIR_CHECK_VERSION(1, 0, 2) */
 
 
 /*
