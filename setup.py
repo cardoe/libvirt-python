@@ -247,6 +247,9 @@ class my_clean(clean):
 
 setup(name = 'libvirt-python',
       version = '1.2.0',
+      url = 'http://www.libvirt.org',
+      maintainer = 'Libvirt Maintainers',
+      maintainer_email = 'libvir-list@redhat.com',
       description = 'The libvirt virtualization API',
       ext_modules = [module, modulelxc, moduleqemu],
       py_modules = ["libvirt", "libvirt_qemu", "libvirt_lxc"],
