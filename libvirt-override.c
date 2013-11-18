@@ -6789,6 +6789,7 @@ libvirt_virDomainSendKey(PyObject *self ATTRIBUTE_UNUSED,
     return py_retval;
 }
 
+#if LIBVIR_CHECK_VERSION(1, 0, 3)
 static PyObject *
 libvirt_virDomainMigrateGetCompressionCache(PyObject *self ATTRIBUTE_UNUSED,
                                             PyObject *args)
@@ -6815,6 +6816,7 @@ libvirt_virDomainMigrateGetCompressionCache(PyObject *self ATTRIBUTE_UNUSED,
 
     return libvirt_ulonglongWrap(cacheSize);
 }
+#endif /* LIBVIR_CHECK_VERSION(1, 0, 3) */
 
 static PyObject *
 libvirt_virDomainMigrateGetMaxSpeed(PyObject *self ATTRIBUTE_UNUSED, PyObject *args) {
@@ -7415,7 +7417,9 @@ static PyMethodDef libvirtMethods[] = {
     {(char *) "virDomainGetBlockIoTune", libvirt_virDomainGetBlockIoTune, METH_VARARGS, NULL},
 #endif /* LIBVIR_CHECK_VERSION(0, 9, 8) */
     {(char *) "virDomainSendKey", libvirt_virDomainSendKey, METH_VARARGS, NULL},
+#if LIBVIR_CHECK_VERSION(1, 0, 3)
     {(char *) "virDomainMigrateGetCompressionCache", libvirt_virDomainMigrateGetCompressionCache, METH_VARARGS, NULL},
+#endif /* LIBVIR_CHECK_VERSION(1, 0, 3) */
     {(char *) "virDomainMigrateGetMaxSpeed", libvirt_virDomainMigrateGetMaxSpeed, METH_VARARGS, NULL},
     {(char *) "virDomainMigrate3", libvirt_virDomainMigrate3, METH_VARARGS, NULL},
     {(char *) "virDomainMigrateToURI3", libvirt_virDomainMigrateToURI3, METH_VARARGS, NULL},
