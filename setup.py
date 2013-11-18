@@ -95,7 +95,9 @@ class my_build(build):
     def run(self):
         apis = self.get_api_xml_files()
 
-        self.spawn(["./generator.py", apis[0], apis[1], apis[2]])
+        self.spawn(["./generator.py", "libvirt", apis[0]])
+        self.spawn(["./generator.py", "libvirt-qemu", apis[1]])
+        self.spawn(["./generator.py", "libvirt-lxc", apis[2]])
 
         build.run(self)
 
