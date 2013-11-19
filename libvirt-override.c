@@ -1384,6 +1384,7 @@ cleanup:
     return ret;
 }
 
+#if LIBVIR_CHECK_VERSION(0, 9, 9)
 static PyObject *
 libvirt_virDomainSetInterfaceParameters(PyObject *self ATTRIBUTE_UNUSED,
                                         PyObject *args)
@@ -1505,6 +1506,7 @@ cleanup:
     virTypedParamsFree(params, nparams);
     return ret;
 }
+#endif /* LIBVIR_CHECK_VERSION(0, 9, 9) */
 
 static PyObject *
 libvirt_virDomainGetVcpus(PyObject *self ATTRIBUTE_UNUSED,
@@ -7280,8 +7282,10 @@ static PyMethodDef libvirtMethods[] = {
     {(char *) "virDomainGetMemoryParameters", libvirt_virDomainGetMemoryParameters, METH_VARARGS, NULL},
     {(char *) "virDomainSetNumaParameters", libvirt_virDomainSetNumaParameters, METH_VARARGS, NULL},
     {(char *) "virDomainGetNumaParameters", libvirt_virDomainGetNumaParameters, METH_VARARGS, NULL},
+#if LIBVIR_CHECK_VERSION(0, 9, 9)
     {(char *) "virDomainSetInterfaceParameters", libvirt_virDomainSetInterfaceParameters, METH_VARARGS, NULL},
     {(char *) "virDomainGetInterfaceParameters", libvirt_virDomainGetInterfaceParameters, METH_VARARGS, NULL},
+#endif /* LIBVIR_CHECK_VERSION(0, 9, 9) */
     {(char *) "virDomainGetVcpus", libvirt_virDomainGetVcpus, METH_VARARGS, NULL},
     {(char *) "virDomainPinVcpu", libvirt_virDomainPinVcpu, METH_VARARGS, NULL},
     {(char *) "virDomainPinVcpuFlags", libvirt_virDomainPinVcpuFlags, METH_VARARGS, NULL},
