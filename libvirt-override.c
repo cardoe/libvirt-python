@@ -4766,6 +4766,7 @@ cleanup:
 }
 #endif /* LIBVIR_CHECK_VERSION(0, 9, 8) */
 
+#if LIBVIR_CHECK_VERSION(0, 9, 10)
 static PyObject *
 libvirt_virDomainGetDiskErrors(PyObject *self ATTRIBUTE_UNUSED,
                                PyObject *args)
@@ -4818,6 +4819,7 @@ cleanup:
     }
     return py_retval;
 }
+#endif /* LIBVIR_CHECK_VERSION(0, 9, 10) */
 
 /*******************************************
  * Helper functions to avoid importing modules
@@ -7356,7 +7358,9 @@ static PyMethodDef libvirtMethods[] = {
     {(char *) "virDomainMigrateToURI3", libvirt_virDomainMigrateToURI3, METH_VARARGS, NULL},
     {(char *) "virDomainBlockPeek", libvirt_virDomainBlockPeek, METH_VARARGS, NULL},
     {(char *) "virDomainMemoryPeek", libvirt_virDomainMemoryPeek, METH_VARARGS, NULL},
+#if LIBVIR_CHECK_VERSION(0, 9, 10)
     {(char *) "virDomainGetDiskErrors", libvirt_virDomainGetDiskErrors, METH_VARARGS, NULL},
+#endif /* LIBVIR_CHECK_VERSION(0, 9, 10) */
     {(char *) "virNodeGetMemoryParameters", libvirt_virNodeGetMemoryParameters, METH_VARARGS, NULL},
     {(char *) "virNodeSetMemoryParameters", libvirt_virNodeSetMemoryParameters, METH_VARARGS, NULL},
     {(char *) "virNodeGetCPUMap", libvirt_virNodeGetCPUMap, METH_VARARGS, NULL},
