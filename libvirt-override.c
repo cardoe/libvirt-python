@@ -4637,6 +4637,7 @@ error:
     return NULL;
 }
 
+#if LIBVIR_CHECK_VERSION(0, 9, 8)
 static PyObject *
 libvirt_virDomainSetBlockIoTune(PyObject *self ATTRIBUTE_UNUSED,
                                 PyObject *args)
@@ -4757,6 +4758,7 @@ cleanup:
     virTypedParamsFree(params, nparams);
     return ret;
 }
+#endif /* LIBVIR_CHECK_VERSION(0, 9, 8) */
 
 static PyObject *
 libvirt_virDomainGetDiskErrors(PyObject *self ATTRIBUTE_UNUSED,
@@ -7331,8 +7333,10 @@ static PyMethodDef libvirtMethods[] = {
     {(char *) "virDomainSnapshotListAllChildren", libvirt_virDomainSnapshotListAllChildren, METH_VARARGS, NULL},
     {(char *) "virDomainRevertToSnapshot", libvirt_virDomainRevertToSnapshot, METH_VARARGS, NULL},
     {(char *) "virDomainGetBlockJobInfo", libvirt_virDomainGetBlockJobInfo, METH_VARARGS, NULL},
+#if LIBVIR_CHECK_VERSION(0, 9, 8)
     {(char *) "virDomainSetBlockIoTune", libvirt_virDomainSetBlockIoTune, METH_VARARGS, NULL},
     {(char *) "virDomainGetBlockIoTune", libvirt_virDomainGetBlockIoTune, METH_VARARGS, NULL},
+#endif /* LIBVIR_CHECK_VERSION(0, 9, 8) */
     {(char *) "virDomainSendKey", libvirt_virDomainSendKey, METH_VARARGS, NULL},
     {(char *) "virDomainMigrateGetCompressionCache", libvirt_virDomainMigrateGetCompressionCache, METH_VARARGS, NULL},
     {(char *) "virDomainMigrateGetMaxSpeed", libvirt_virDomainMigrateGetMaxSpeed, METH_VARARGS, NULL},
