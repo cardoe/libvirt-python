@@ -6504,6 +6504,7 @@ libvirt_virConnectCloseCallbackDispatch(virConnectPtr conn ATTRIBUTE_UNUSED,
     LIBVIRT_RELEASE_THREAD_STATE;
 }
 
+#if LIBVIR_CHECK_VERSION(0, 10, 0)
 static PyObject *
 libvirt_virConnectRegisterCloseCallback(ATTRIBUTE_UNUSED PyObject * self,
                                         PyObject * args)
@@ -6570,6 +6571,7 @@ libvirt_virConnectUnregisterCloseCallback(ATTRIBUTE_UNUSED PyObject * self,
     py_retval = libvirt_intWrap(ret);
     return py_retval;
 }
+#endif /* LIBVIR_CHECK_VERSION(0, 10, 0) */
 
 static void
 libvirt_virStreamEventFreeFunc(void *opaque)
@@ -7253,8 +7255,10 @@ static PyMethodDef libvirtMethods[] = {
     {(char *) "virConnectDomainEventDeregister", libvirt_virConnectDomainEventDeregister, METH_VARARGS, NULL},
     {(char *) "virConnectDomainEventRegisterAny", libvirt_virConnectDomainEventRegisterAny, METH_VARARGS, NULL},
     {(char *) "virConnectDomainEventDeregisterAny", libvirt_virConnectDomainEventDeregisterAny, METH_VARARGS, NULL},
+#if LIBVIR_CHECK_VERSION(0, 10, 0)
     {(char *) "virConnectRegisterCloseCallback", libvirt_virConnectRegisterCloseCallback, METH_VARARGS, NULL},
     {(char *) "virConnectUnregisterCloseCallback", libvirt_virConnectUnregisterCloseCallback, METH_VARARGS, NULL},
+#endif /* LIBVIR_CHECK_VERSION(0, 10, 0) */
     {(char *) "virStreamEventAddCallback", libvirt_virStreamEventAddCallback, METH_VARARGS, NULL},
     {(char *) "virStreamRecv", libvirt_virStreamRecv, METH_VARARGS, NULL},
     {(char *) "virStreamSend", libvirt_virStreamSend, METH_VARARGS, NULL},
