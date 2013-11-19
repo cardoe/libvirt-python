@@ -3577,6 +3577,7 @@ libvirt_virStoragePoolListVolumes(PyObject *self ATTRIBUTE_UNUSED,
     return py_retval;
 }
 
+#if LIBVIR_CHECK_VERSION(0, 10, 2)
 static PyObject *
 libvirt_virStoragePoolListAllVolumes(PyObject *self ATTRIBUTE_UNUSED,
                                      PyObject *args)
@@ -3624,6 +3625,7 @@ cleanup:
     VIR_FREE(vols);
     return py_retval;
 }
+#endif /* LIBVIR_CHECK_VERSION(0, 10, 2) */
 
 
 static PyObject *
@@ -7341,7 +7343,9 @@ static PyMethodDef libvirtMethods[] = {
 #endif /* LIBVIR_CHECK_VERSION(0, 10, 2) */
     {(char *) "virStoragePoolGetAutostart", libvirt_virStoragePoolGetAutostart, METH_VARARGS, NULL},
     {(char *) "virStoragePoolListVolumes", libvirt_virStoragePoolListVolumes, METH_VARARGS, NULL},
+#if LIBVIR_CHECK_VERSION(0, 10, 2)
     {(char *) "virStoragePoolListAllVolumes", libvirt_virStoragePoolListAllVolumes, METH_VARARGS, NULL},
+#endif /* LIBVIR_CHECK_VERSION(0, 10, 2) */
     {(char *) "virStoragePoolGetInfo", libvirt_virStoragePoolGetInfo, METH_VARARGS, NULL},
     {(char *) "virStorageVolGetInfo", libvirt_virStorageVolGetInfo, METH_VARARGS, NULL},
     {(char *) "virStoragePoolGetUUID", libvirt_virStoragePoolGetUUID, METH_VARARGS, NULL},
