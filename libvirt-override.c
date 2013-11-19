@@ -526,6 +526,7 @@ cleanup:
     return ret;
 }
 
+#if LIBVIR_CHECK_VERSION(0, 9, 10)
 static PyObject *
 libvirt_virDomainGetCPUStats(PyObject *self ATTRIBUTE_UNUSED, PyObject *args)
 {
@@ -661,6 +662,7 @@ error:
     Py_DECREF(ret);
     return error;
 }
+#endif /* LIBVIR_CHECK_VERSION(0, 9, 10) */
 
 static PyObject *
 libvirt_virDomainInterfaceStats(PyObject *self ATTRIBUTE_UNUSED, PyObject *args) {
@@ -7269,7 +7271,9 @@ static PyMethodDef libvirtMethods[] = {
     {(char *) "virNetworkGetAutostart", libvirt_virNetworkGetAutostart, METH_VARARGS, NULL},
     {(char *) "virDomainBlockStats", libvirt_virDomainBlockStats, METH_VARARGS, NULL},
     {(char *) "virDomainBlockStatsFlags", libvirt_virDomainBlockStatsFlags, METH_VARARGS, NULL},
+#if LIBVIR_CHECK_VERSION(0, 9, 10)
     {(char *) "virDomainGetCPUStats", libvirt_virDomainGetCPUStats, METH_VARARGS, NULL},
+#endif /* LIBVIR_CHECK_VERSION(0, 9, 10) */
     {(char *) "virDomainInterfaceStats", libvirt_virDomainInterfaceStats, METH_VARARGS, NULL},
     {(char *) "virDomainMemoryStats", libvirt_virDomainMemoryStats, METH_VARARGS, NULL},
     {(char *) "virNodeGetCellsFreeMemory", libvirt_virNodeGetCellsFreeMemory, METH_VARARGS, NULL},
