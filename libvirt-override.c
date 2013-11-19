@@ -2656,6 +2656,7 @@ cleanup:
 }
 #endif /* LIBVIR_CHECK_VERSION(0, 9, 7) */
 
+#if LIBVIR_CHECK_VERSION(0, 9, 13)
 static PyObject *
 libvirt_virDomainSnapshotListAllChildren(PyObject *self ATTRIBUTE_UNUSED,
                                          PyObject *args)
@@ -2701,6 +2702,7 @@ cleanup:
     VIR_FREE(snaps);
     return py_retval;
 }
+#endif /* LIBVIR_CHECK_VERSION(0, 9, 13) */
 
 static PyObject *
 libvirt_virDomainRevertToSnapshot(PyObject *self ATTRIBUTE_UNUSED,
@@ -7352,7 +7354,9 @@ static PyMethodDef libvirtMethods[] = {
 #if LIBVIR_CHECK_VERSION(0, 9, 7)
     {(char *) "virDomainSnapshotListChildrenNames", libvirt_virDomainSnapshotListChildrenNames, METH_VARARGS, NULL},
 #endif /* LIBVIR_CHECK_VERSION(0, 9, 7) */
+#if LIBVIR_CHECK_VERSION(0, 9, 13)
     {(char *) "virDomainSnapshotListAllChildren", libvirt_virDomainSnapshotListAllChildren, METH_VARARGS, NULL},
+#endif /* LIBVIR_CHECK_VERSION(0, 9, 13) */
     {(char *) "virDomainRevertToSnapshot", libvirt_virDomainRevertToSnapshot, METH_VARARGS, NULL},
     {(char *) "virDomainGetBlockJobInfo", libvirt_virDomainGetBlockJobInfo, METH_VARARGS, NULL},
 #if LIBVIR_CHECK_VERSION(0, 9, 8)
