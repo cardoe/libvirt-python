@@ -1264,6 +1264,7 @@ cleanup:
     return ret;
 }
 
+#if LIBVIR_CHECK_VERSION(0, 9, 9)
 static PyObject *
 libvirt_virDomainSetNumaParameters(PyObject *self ATTRIBUTE_UNUSED,
                                    PyObject *args)
@@ -1383,6 +1384,7 @@ cleanup:
     virTypedParamsFree(params, nparams);
     return ret;
 }
+#endif /* LIBVIR_CHECK_VERSION(0, 9, 9) */
 
 #if LIBVIR_CHECK_VERSION(0, 9, 9)
 static PyObject *
@@ -7280,8 +7282,10 @@ static PyMethodDef libvirtMethods[] = {
     {(char *) "virDomainGetBlkioParameters", libvirt_virDomainGetBlkioParameters, METH_VARARGS, NULL},
     {(char *) "virDomainSetMemoryParameters", libvirt_virDomainSetMemoryParameters, METH_VARARGS, NULL},
     {(char *) "virDomainGetMemoryParameters", libvirt_virDomainGetMemoryParameters, METH_VARARGS, NULL},
+#if LIBVIR_CHECK_VERSION(0, 9, 9)
     {(char *) "virDomainSetNumaParameters", libvirt_virDomainSetNumaParameters, METH_VARARGS, NULL},
     {(char *) "virDomainGetNumaParameters", libvirt_virDomainGetNumaParameters, METH_VARARGS, NULL},
+#endif /* LIBVIR_CHECK_VERSION(0, 9, 9) */
 #if LIBVIR_CHECK_VERSION(0, 9, 9)
     {(char *) "virDomainSetInterfaceParameters", libvirt_virDomainSetInterfaceParameters, METH_VARARGS, NULL},
     {(char *) "virDomainGetInterfaceParameters", libvirt_virDomainGetInterfaceParameters, METH_VARARGS, NULL},
