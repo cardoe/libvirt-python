@@ -6967,6 +6967,7 @@ cleanup:
     return py_retval;
 }
 
+#if LIBVIR_CHECK_VERSION(0, 10, 2)
 static PyObject *
 libvirt_virNodeSetMemoryParameters(PyObject *self ATTRIBUTE_UNUSED,
                                    PyObject *args)
@@ -7086,6 +7087,7 @@ cleanup:
     virTypedParamsFree(params, nparams);
     return ret;
 }
+#endif /* LIBVIR_CHECK_VERSION(0, 10, 2) */
 
 static PyObject *
 libvirt_virNodeGetCPUMap(PyObject *self ATTRIBUTE_UNUSED,
@@ -7405,8 +7407,10 @@ static PyMethodDef libvirtMethods[] = {
 #if LIBVIR_CHECK_VERSION(0, 9, 10)
     {(char *) "virDomainGetDiskErrors", libvirt_virDomainGetDiskErrors, METH_VARARGS, NULL},
 #endif /* LIBVIR_CHECK_VERSION(0, 9, 10) */
+#if LIBVIR_CHECK_VERSION(0, 10, 2)
     {(char *) "virNodeGetMemoryParameters", libvirt_virNodeGetMemoryParameters, METH_VARARGS, NULL},
     {(char *) "virNodeSetMemoryParameters", libvirt_virNodeSetMemoryParameters, METH_VARARGS, NULL},
+#endif /* LIBVIR_CHECK_VERSION(0, 10, 2) */
     {(char *) "virNodeGetCPUMap", libvirt_virNodeGetCPUMap, METH_VARARGS, NULL},
     {(char *) "virDomainCreateXMLWithFiles", libvirt_virDomainCreateXMLWithFiles, METH_VARARGS, NULL},
     {(char *) "virDomainCreateWithFiles", libvirt_virDomainCreateWithFiles, METH_VARARGS, NULL},
